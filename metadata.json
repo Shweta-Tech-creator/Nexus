@@ -1,0 +1,5 @@
+{
+  "name": "Nexus",
+  "description": "A high-performance, scalable React dashboard template with JWT-simulated authentication, modern dark UI design, and fluid Framer Motion animations.",
+  "requestFramePermissions": []
+}

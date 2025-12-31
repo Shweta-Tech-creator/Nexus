@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - MONGO_URI=mongodb://mongo:27017/nexus
+      - JWT_SECRET=dev_secret_key_123
+    depends_on:
+      - mongo
+    networks:
+      - nexus-network
+
+  frontend:
+    build: .
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - nexus-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - nexus-network
+
+networks:
+  nexus-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
